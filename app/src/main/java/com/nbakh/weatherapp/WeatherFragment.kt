@@ -16,7 +16,10 @@ class WeatherFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        locationViewModel.locationLiveData.observe(viewLifecycleOwner)
+        locationViewModel.locationLiveData.observe(viewLifecycleOwner) {
+            //Toast.makeText(requireActivity(), "${it.latitude}, ${it.longitude}", Toast.LENGTH_LONG).show()
+        }
+        return inflater.inflate(R.layout.fragment_weather, container, false)
     }
 
 }

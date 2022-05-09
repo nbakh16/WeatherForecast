@@ -23,16 +23,16 @@ class MainActivity : AppCompatActivity() {
         when {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
                 // Precise location access granted.
-                Toast.makeText(this, "Fine Location Granted", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Fine Location Granted", Toast.LENGTH_SHORT).show()
                 detectUserLocation()
             }
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
                 // Only approximate location access granted.
-                Toast.makeText(this, "Coarse Location Granted", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Coarse Location Granted", Toast.LENGTH_SHORT).show()
                 detectUserLocation()
             } else -> {
             // No location access granted.
-            Toast.makeText(this, "NO Location Granted", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "NO Location Granted", Toast.LENGTH_SHORT).show()
         }
         }
     }
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             if(it.isSuccessful) {
                 val location = it.result
                 locationViewModel.setNewLocation(location)
-
+                Toast.makeText(this, "${location.latitude}, ${location.longitude}", Toast.LENGTH_LONG).show()
             }
         }
     }
