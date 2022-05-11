@@ -1,4 +1,4 @@
-package com.nbakh.weatherapp
+package com.nbakh.weatherforecast
 
 import org.junit.Test
 

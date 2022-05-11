@@ -1,4 +1,4 @@
-package com.nbakh.weatherapp
+package com.nbakh.weatherforecast
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

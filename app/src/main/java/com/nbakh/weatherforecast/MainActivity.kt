@@ -1,4 +1,4 @@
-package com.nbakh.weatherapp
+package com.nbakh.weatherforecast
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -12,7 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.nbakh.weatherapp.viewmodels.LocationViewModel
+import com.nbakh.weatherforecast.viewmodels.LocationViewModel
 
 class MainActivity : AppCompatActivity() {
     private val locationViewModel : LocationViewModel by viewModels()
