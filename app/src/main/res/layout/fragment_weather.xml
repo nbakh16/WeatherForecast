@@ -1,14 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".WeatherFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        tools:context=".WeatherFragment">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/dateTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="12 May 2022, 11:57"
+                android:textSize="22sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/locationTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Dhaka, BD"
+                android:textSize="26sp"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/weatherIconIV"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@mipmap/ic_launcher"/>
+                <TextView
+                    android:id="@+id/tempTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="35\u00B0"
+                    android:textSize="50sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="15dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/feelsLikeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Feels like: 40\u00B0"
+                android:textSize="22sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/weatherConditionTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Sunny"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Humidity: "
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/humidityTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="74"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pressure: "
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="8dp"/>
+                <TextView
+                    android:id="@+id/pressureTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="1008"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/forecastRV"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</layout>

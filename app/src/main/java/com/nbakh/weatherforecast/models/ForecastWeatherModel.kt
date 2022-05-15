@@ -1,7 +1,6 @@
 package com.nbakh.weatherforecast.models
 import com.google.gson.annotations.SerializedName
 
-
 data class ForecastModel(
     @SerializedName("city")
     val city: City,
@@ -10,7 +9,7 @@ data class ForecastModel(
     @SerializedName("cod")
     val cod: String,
     @SerializedName("list")
-    val list: List<ForecastList>,
+    val list: List<ForecastItem>,
     @SerializedName("message")
     val message: Int
 ) {
@@ -26,25 +25,25 @@ data class ForecastModel(
         @SerializedName("population")
         val population: Int,
         @SerializedName("sunrise")
-        val sunrise: Int,
+        val sunrise: Long,
         @SerializedName("sunset")
-        val sunset: Int,
+        val sunset: Long,
         @SerializedName("timezone")
         val timezone: Int
     ) {
         data class Coord(
             @SerializedName("lat")
-            val lat: Int,
+            val lat: Double,
             @SerializedName("lon")
-            val lon: Int
+            val lon: Double
         )
     }
 
-    data class ForecastList(
+    data class ForecastItem(
         @SerializedName("clouds")
         val clouds: Clouds,
         @SerializedName("dt")
-        val dt: Int,
+        val dt: Long,
         @SerializedName("dt_txt")
         val dtTxt: String,
         @SerializedName("main")

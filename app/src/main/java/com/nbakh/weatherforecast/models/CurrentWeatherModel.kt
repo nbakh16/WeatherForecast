@@ -1,7 +1,6 @@
 package com.nbakh.weatherforecast.models
 import com.google.gson.annotations.SerializedName
 
-
 data class CurrentModel(
     @SerializedName("base")
     val base: String,
@@ -12,7 +11,7 @@ data class CurrentModel(
     @SerializedName("coord")
     val coord: Coord,
     @SerializedName("dt")
-    val dt: Int,
+    val dt: Long,
     @SerializedName("id")
     val id: Int,
     @SerializedName("main")
@@ -37,22 +36,18 @@ data class CurrentModel(
 
     data class Coord(
         @SerializedName("lat")
-        val lat: Int,
+        val lat: Double,
         @SerializedName("lon")
-        val lon: Int
+        val lon: Double
     )
 
     data class Main(
         @SerializedName("feels_like")
         val feelsLike: Double,
-        @SerializedName("grnd_level")
-        val grndLevel: Int,
         @SerializedName("humidity")
         val humidity: Int,
         @SerializedName("pressure")
         val pressure: Int,
-        @SerializedName("sea_level")
-        val seaLevel: Int,
         @SerializedName("temp")
         val temp: Double,
         @SerializedName("temp_max")
@@ -64,10 +59,14 @@ data class CurrentModel(
     data class Sys(
         @SerializedName("country")
         val country: String,
+        @SerializedName("id")
+        val id: Int,
         @SerializedName("sunrise")
-        val sunrise: Int,
+        val sunrise: Long,
         @SerializedName("sunset")
-        val sunset: Int
+        val sunset: Long,
+        @SerializedName("type")
+        val type: Int
     )
 
     data class Weather(
@@ -84,8 +83,6 @@ data class CurrentModel(
     data class Wind(
         @SerializedName("deg")
         val deg: Int,
-        @SerializedName("gust")
-        val gust: Double,
         @SerializedName("speed")
         val speed: Double
     )

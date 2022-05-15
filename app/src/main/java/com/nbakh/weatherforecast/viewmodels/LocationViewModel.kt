@@ -10,23 +10,23 @@ import com.nbakh.weatherforecast.models.ForecastModel
 import com.nbakh.weatherforecast.repos.WeatherRepository
 import kotlinx.coroutines.launch
 
-class LocationViewModel : ViewModel() {
+class LocationViewModel : ViewModel(){
     val repository = WeatherRepository()
-    val locationLiveData : MutableLiveData<Location> = MutableLiveData()
-    val currentModelLiveData : MutableLiveData<CurrentModel> = MutableLiveData()
-    val forecastModelLiveData : MutableLiveData<ForecastModel> = MutableLiveData()
+    val locationLiveData: MutableLiveData<Location> = MutableLiveData()
+    val currentModelLD: MutableLiveData<CurrentModel> = MutableLiveData()
+    val forecastModelLD: MutableLiveData<ForecastModel> = MutableLiveData()
 
-    fun setNewLocation(location: Location){
+    fun setNewLocation(location: Location) {
         locationLiveData.value = location
     }
 
-    fun fetchData() {
+    fun fetchData(status: Boolean = false) {
         viewModelScope.launch {
             try {
-                currentModelLiveData.value = repository.fetchCurrentWeatherData(locationLiveData.value!!)
-                forecastModelLiveData.value = repository.fetchForecastWeatherData(locationLiveData.value!!)
-            } catch (e: Exception) {
-                Log.d("LocationViewModel", e.localizedMessage)
+                currentModelLD.value = repository.fetchCurrentWeatherData(locationLiveData.value!!, status = status)
+                forecastModelLD.value = repository.fetchForecastWeatherData(locationLiveData.value!!, status = status)
+            }catch (e: Exception) {
+                Log.e("LocationViewModel", e.localizedMessage)
             }
         }
     }
