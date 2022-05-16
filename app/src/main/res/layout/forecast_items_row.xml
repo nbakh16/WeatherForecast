@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="forecast"
+            type="com.nbakh.weatherforecast.models.ForecastModel.ForecastList" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        app:contentPaddingTop="5dp"
+        app:contentPaddingBottom="5dp"
+        app:cardBackgroundColor="@color/purple_500"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="15dp"
+        android:layout_margin="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/purple_500"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Tue 10:10PM"
+                app:setDateTime="@{forecast.dt}"
+                android:textColor="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@mipmap/ic_launcher"
+                    app:setIcon="@{forecast.weather[0].icon}"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="22C"
+                    android:text="@{String.valueOf(forecast.main.temp)+'\u2103'}"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Clear sky"
+                android:text="@{forecast.weather[0].description}"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

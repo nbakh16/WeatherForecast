@@ -3,13 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="current"
+            type="com.nbakh.weatherforecast.models.CurrentModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/light_sky"
         tools:context=".WeatherFragment">
 
         <LinearLayout
@@ -17,20 +20,21 @@
             android:layout_height="0dp"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_weight="2">
+            android:layout_weight="3">
 
             <TextView
                 android:id="@+id/dateTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="12 May 2022, 11:57"
-                android:textSize="22sp"
+                tools:text="05 May, 10:10PM"
+                android:textSize="18sp"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/locationTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Dhaka, BD"
+                android:text="@{current.name}"
                 android:textSize="26sp"
                 android:textColor="@color/black"/>
 
@@ -38,18 +42,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_margin="10dp"
                 android:gravity="center">
 
                 <ImageView
                     android:id="@+id/weatherIconIV"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    tools:src="@mipmap/ic_launcher"/>
                 <TextView
                     android:id="@+id/tempTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="35\u00B0"
+                    tools:text="35\u00B0C"
+                    android:text="@{String.valueOf(current.main.temp)}"
                     android:textSize="50sp"
                     android:textColor="@color/black"
                     android:layout_marginStart="15dp"/>
@@ -60,66 +66,45 @@
                 android:id="@+id/feelsLikeTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Feels like: 40\u00B0"
-                android:textSize="22sp"
+                tools:text="Feels like: 40\u00B0C"
+                android:textSize="20sp"
                 android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/weatherConditionTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 tools:text="Sunny"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textColor="@color/black"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/humidityPressureTV"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Humidity: "
-                    android:textSize="20sp"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:id="@+id/humidityTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="74"
-                    android:textSize="20sp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pressure: "
-                    android:textSize="20sp"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="8dp"/>
-                <TextView
-                    android:id="@+id/pressureTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="1008"
-                    android:textSize="20sp"
-                    android:textColor="@color/black"/>
-
-            </LinearLayout>
+                tools:text="Humidity: 33, Pressure: 66"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Next 5days/3hours forecast"
+            android:textColor="@color/black"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/forecastRV"/>
-        </RelativeLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/forecastRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
 
     </LinearLayout>
 </layout>

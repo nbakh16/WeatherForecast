@@ -11,6 +11,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.nbakh.weatherforecast.adapters.ForecastAdapter
 import com.nbakh.weatherforecast.databinding.FragmentWeatherBinding
 import com.nbakh.weatherforecast.models.CurrentModel
 import com.nbakh.weatherforecast.network.getFormattedDate
@@ -22,7 +23,6 @@ import com.nbakh.weatherforecast.viewmodels.LocationViewModel
 import kotlin.math.roundToInt
 
 class WeatherFragment : Fragment() {
-    private val TAG = "WeatherFragment"
     private lateinit var binding: FragmentWeatherBinding
     private lateinit var preference: WeatherPreference
     private val locationViewModel: LocationViewModel by activityViewModels()
@@ -38,34 +38,34 @@ class WeatherFragment : Fragment() {
     ): View? {
         preference = WeatherPreference(requireContext())
         binding = FragmentWeatherBinding.inflate(inflater, container, false)
+        val adapter = ForecastAdapter()
         val llm = LinearLayoutManager(requireActivity())
         llm.orientation = LinearLayoutManager.HORIZONTAL
         binding.forecastRV.layoutManager = llm
+        binding.forecastRV.adapter = adapter
         locationViewModel.locationLiveData.observe(viewLifecycleOwner) {
-            Log.e(TAG, "${it.latitude} ${it.longitude}")
-            locationViewModel.fetchData(status = preference.getTempUnitStatus())
+            //locationViewModel.fetchData(status = preference.getTempUnitStatus())
+            locationViewModel.fetchData()
         }
         locationViewModel.currentModelLD.observe(viewLifecycleOwner) {
             setCurrentData(it)
         }
         locationViewModel.forecastModelLD.observe(viewLifecycleOwner) {
-            Log.e(TAG, "${it.list.size}")
+            adapter.submitList(it.list)
         }
-
 
         return binding.root
     }
 
     private fun setCurrentData(it: CurrentModel) {
-        binding.dateTV.text = getFormattedDate(it.dt, "MMM dd, yyyy HH:mm")
+        binding.dateTV.text = getFormattedDate(it.dt, "MMM dd, hh:mmaa")
         binding.locationTV.text = "${it.name}, ${it.sys.country}"
         val iconUrl = "$icon_url_prefix${it.weather[0].icon}${icon_url_suffix}"
         Glide.with(requireActivity()).load(iconUrl).into(binding.weatherIconIV)
-        binding.tempTv.text = it.main.temp.roundToInt().toString()
-        binding.feelsLikeTV.text = "feels like: ${it.main.feelsLike.roundToInt()}"
+        binding.tempTv.text = it.main.temp.roundToInt().toString() + "\u2103"
+        binding.feelsLikeTV.text = "feels like: ${it.main.feelsLike.roundToInt()}" + "\u2103"
         binding.weatherConditionTV.text = it.weather[0].description
-        binding.humidityTV.text = it.main.humidity.toString()
-        binding.pressureTV.text = it.main.pressure.toString()
+        binding.humidityPressureTV.text = "Humidity: ${it.main.humidity}, Pressure: ${it.main.pressure}"
     }
 
 }
