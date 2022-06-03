@@ -14,10 +14,7 @@ import com.bumptech.glide.Glide
 import com.nbakh.weatherforecast.adapters.ForecastAdapter
 import com.nbakh.weatherforecast.databinding.FragmentWeatherBinding
 import com.nbakh.weatherforecast.models.CurrentModel
-import com.nbakh.weatherforecast.network.getFormattedDate
-import com.nbakh.weatherforecast.network.icon_url_prefix
-import com.nbakh.weatherforecast.network.icon_url_suffix
-import com.nbakh.weatherforecast.network.weather_api_key
+import com.nbakh.weatherforecast.network.*
 import com.nbakh.weatherforecast.prefs.WeatherPreference
 import com.nbakh.weatherforecast.viewmodels.LocationViewModel
 import kotlin.math.roundToInt
@@ -51,6 +48,15 @@ class WeatherFragment : Fragment() {
             }
 
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.item_location) {
+            detectUserLocation(requireContext()) {
+                locationViewModel.setNewLocation(it)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun convertCityToLatLng(query: String) {
@@ -106,8 +112,16 @@ class WeatherFragment : Fragment() {
         binding.locationTV.text = "${it.name}, ${it.sys.country}"
         val iconUrl = "$icon_url_prefix${it.weather[0].icon}${icon_url_suffix}"
         Glide.with(requireActivity()).load(iconUrl).into(binding.weatherIconIV)
-        binding.tempTv.text = it.main.temp.roundToInt().toString() + "\u2103"
-        binding.feelsLikeTV.text = "feels like: ${it.main.feelsLike.roundToInt()}" + "\u2103"
+
+        if(binding.tempSwitch.isChecked){
+            binding.tempTv.text = it.main.temp.roundToInt().toString() + "\u2109"
+            binding.feelsLikeTV.text = "feels like: ${it.main.feelsLike.roundToInt()}" + "\u2109"
+        }
+        else {
+            binding.tempTv.text = it.main.temp.roundToInt().toString() + "\u2103"
+            binding.feelsLikeTV.text = "feels like: ${it.main.feelsLike.roundToInt()}" + "\u2103"
+        }
+
         binding.weatherConditionTV.text = it.weather[0].description
         binding.humidityPressureTV.text = "Humidity: ${it.main.humidity}, Pressure: ${it.main.pressure}"
     }
