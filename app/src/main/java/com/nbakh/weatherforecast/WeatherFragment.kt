@@ -26,11 +26,49 @@ class WeatherFragment : Fragment() {
     private lateinit var binding: FragmentWeatherBinding
     private lateinit var preference: WeatherPreference
     private val locationViewModel: LocationViewModel by activityViewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search_menu, menu)
+        val searchView = menu.findItem(R.id.item_search)
+            .actionView as SearchView
+        searchView.queryHint = "Enter any city name"
+        searchView.isSubmitButtonEnabled = true
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    convertCityToLatLng(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+
+        })
+    }
+
+    private fun convertCityToLatLng(query: String) {
+        val geoCoder = Geocoder(requireActivity())
+        val addressList = geoCoder.getFromLocationName(query, 1)
+        if (addressList.isNotEmpty()){
+            val lat = addressList[0].latitude;
+            val lng = addressList[0].longitude;
+            val location = Location("").apply {
+                latitude = lat
+                longitude = lng
+            }
+            locationViewModel.setNewLocation(location)
+        }
+        else {
+            Toast.makeText(requireActivity(), "Invalid City!!", Toast.LENGTH_LONG).show()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
