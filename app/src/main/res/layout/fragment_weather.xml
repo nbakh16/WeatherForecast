@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -8,104 +9,118 @@
             type="com.nbakh.weatherforecast.models.CurrentModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="20dp"
-        android:background="@color/light_sky"
-        tools:context=".WeatherFragment">
-
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="3">
-
-            <TextView
-                android:id="@+id/dateTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="05 May, 10:10PM"
-                android:textSize="18sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/locationTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Dhaka, BD"
-                android:text="@{current.name}"
-                android:textSize="26sp"
-                android:textColor="@color/black"/>
+            android:paddingBottom="20dp"
+            android:background="@color/light_sky"
+            tools:context=".WeatherFragment">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="10dp"
-                android:gravity="center">
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="3">
 
-                <ImageView
-                    android:id="@+id/weatherIconIV"
-                    android:layout_width="68dp"
-                    android:layout_height="68dp"
-                    tools:src="@mipmap/ic_launcher"/>
                 <TextView
-                    android:id="@+id/tempTv"
+                    android:id="@+id/dateTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="35\u00B0C"
-                    android:text="@{String.valueOf(current.main.temp)}"
-                    android:textSize="50sp"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="15dp"/>
+                    tools:text="05 May, 10:10PM"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/locationTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Dhaka, BD"
+                    android:text="@{current.name}"
+                    android:textSize="26sp"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="10dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/weatherIconIV"
+                        android:layout_width="68dp"
+                        android:layout_height="68dp"
+                        tools:src="@mipmap/ic_launcher"/>
+                    <TextView
+                        android:id="@+id/tempTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="35\u00B0C"
+                        android:text="@{String.valueOf(current.main.temp)}"
+                        android:textSize="50sp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="15dp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/feelsLikeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Feels like: 40\u00B0C"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/weatherConditionTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    tools:text="Sunny"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/humidityPressureTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Humidity: 33, Pressure: 66"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/feelsLikeTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Feels like: 40\u00B0C"
-                android:textSize="20sp"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/weatherConditionTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                tools:text="Sunny"
-                android:textSize="24sp"
+                android:layout_marginLeft="5dp"
+                android:text="Next 5days/3hours forecast"
                 android:textColor="@color/black"/>
 
-            <TextView
-                android:id="@+id/humidityPressureTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Humidity: 33, Pressure: 66"
-                android:textSize="18sp"
-                android:textColor="@color/black"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/forecastRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
 
         </LinearLayout>
-
-        <TextView
+        <androidx.appcompat.widget.SwitchCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="Next 5days/3hours forecast"
-            android:textColor="@color/black"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/forecastRV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </RelativeLayout>
-
-    </LinearLayout>
+            android:id="@+id/tempSwitch"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="10dp"
+            app:showText="true"
+            android:textOff="C"
+            android:textOn="F"
+            />
+    </RelativeLayout>
 </layout>

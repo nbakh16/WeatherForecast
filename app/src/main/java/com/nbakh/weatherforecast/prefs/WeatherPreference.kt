@@ -12,8 +12,8 @@ class WeatherPreference(context: Context) {
         editor = preference.edit()
     }
 
-    fun setTempUnitStatus(status: Boolean) {
-        editor.putBoolean(tempStatus, status)
+    fun setTempUnitStatus(isFahrenheit: Boolean) {
+        editor.putBoolean(tempStatus, isFahrenheit)
         editor.commit()
     }
 

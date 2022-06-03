@@ -76,13 +76,14 @@ class WeatherFragment : Fragment() {
     ): View? {
         preference = WeatherPreference(requireContext())
         binding = FragmentWeatherBinding.inflate(inflater, container, false)
+        binding.tempSwitch.isChecked = preference.getTempUnitStatus()
         val adapter = ForecastAdapter()
         val llm = LinearLayoutManager(requireActivity())
         llm.orientation = LinearLayoutManager.HORIZONTAL
         binding.forecastRV.layoutManager = llm
         binding.forecastRV.adapter = adapter
         locationViewModel.locationLiveData.observe(viewLifecycleOwner) {
-            //locationViewModel.fetchData(status = preference.getTempUnitStatus())
+            locationViewModel.fetchData(isFahrenheit = preference.getTempUnitStatus())
             locationViewModel.fetchData()
         }
         locationViewModel.currentModelLD.observe(viewLifecycleOwner) {
@@ -90,6 +91,11 @@ class WeatherFragment : Fragment() {
         }
         locationViewModel.forecastModelLD.observe(viewLifecycleOwner) {
             adapter.submitList(it.list)
+        }
+
+        binding.tempSwitch.setOnCheckedChangeListener { compoundButton, isFahrenheit ->
+            preference.setTempUnitStatus(isFahrenheit)
+            locationViewModel.fetchData(isFahrenheit)
         }
 
         return binding.root
