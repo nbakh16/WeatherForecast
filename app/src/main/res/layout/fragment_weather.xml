@@ -22,26 +22,23 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp">
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_weight="3">
-
-                <TextView
-                    android:id="@+id/dateTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="05 May, 10:10PM"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:id="@+id/locationTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Dhaka, BD"
-                    android:text="@{current.name}"
-                    android:textSize="26sp"
-                    android:textColor="@color/black"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -68,28 +65,74 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/weatherConditionTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    tools:text="Sunny"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"/>
+
+                <TextView
                     android:id="@+id/feelsLikeTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Feels like: 40\u00B0C"
                     android:textSize="20sp"
                     android:textColor="@color/black"/>
-                <TextView
-                    android:id="@+id/weatherConditionTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    tools:text="Sunny"
-                    android:textSize="24sp"
-                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/humidityPressureTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Humidity: 33, Pressure: 66"
+                    tools:text="Humidity: 33%, Pressure: 66"
                     android:textSize="18sp"
                     android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunrise and Sunset"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp">
+                    <TextView
+                        android:id="@+id/sunriseTV"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        tools:text="05:00AM"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:text="-------------------------------------------------------"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:singleLine="true"
+                        android:ellipsize="none"/>
+                    <TextView
+                        android:id="@+id/sunsetTV"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        tools:text="06:00PM"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:gravity="right"/>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -117,10 +160,30 @@
             android:layout_height="wrap_content"
             android:id="@+id/tempSwitch"
             android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
+            android:layout_margin="15dp"
             app:showText="true"
             android:textOff="C"
             android:textOn="F"
             />
+
+        <TextView
+            android:id="@+id/dateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="05 May, 10:10PM"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"/>
+        <TextView
+            android:id="@+id/locationTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Dhaka, BD"
+            android:text="@{current.name}"
+            android:textSize="26sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="15dp"/>
     </RelativeLayout>
 </layout>

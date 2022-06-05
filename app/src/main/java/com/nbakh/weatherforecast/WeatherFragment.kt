@@ -123,7 +123,10 @@ class WeatherFragment : Fragment() {
         }
 
         binding.weatherConditionTV.text = it.weather[0].description
-        binding.humidityPressureTV.text = "Humidity: ${it.main.humidity}, Pressure: ${it.main.pressure}"
+        binding.humidityPressureTV.text = "Humidity: ${it.main.humidity}%, Pressure: ${it.main.pressure}"
+
+        binding.sunriseTV.text = getFormattedDate(it.sys.sunrise, "hh:mmaa")
+        binding.sunsetTV.text = getFormattedDate(it.sys.sunset, "hh:mmaa")
     }
 
 }
